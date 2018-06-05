@@ -1,0 +1,42 @@
+#--------------------------------------------------------------
+# 
+#  Project #5: Optimizing performance on a pipelined processor
+#
+#  June 5, 2018
+#
+#  Jin-Soo Kim (jinsoo.kim@snu.ac.kr)
+#  Systems Software & Architecture Laboratory
+#  Dept. of Computer Science and Engineering
+#  Seoul National University
+#
+#--------------------------------------------------------------
+
+# bmp_grid() starts here
+	.pos	0x400
+	.align 8
+bmp_grid:
+	# imgptr is in %rdi
+	# width  is in %rsi
+	# height is in %rdx
+	# gap	 is in %rcx
+    # ----------------------------------------------------------
+
+	# FILL HERE 
+
+
+
+
+
+
+
+
+
+
+
+
+    # ----------------------------------------------------------
+	# NOTE: The code size is limited to 1024 bytes. 
+    # The addresses of all instructions must be within 0x800.
+    # ----------------------------------------------------------
+
+	ret

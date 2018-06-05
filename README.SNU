@@ -1,0 +1,52 @@
+#--------------------------------------------------------------
+# 
+#  Project #5: Optimizing performance on a pipelined processor
+#
+#  June 5, 2018
+#
+#  Jin-Soo Kim (jinsoo.kim@snu.ac.kr)
+#  Systems Software & Architecture Laboratory
+#  Dept. of Computer Science and Engineering
+#  Seoul National University
+#
+#--------------------------------------------------------------
+
+This project is based on the materials developed by Textbook authors.
+You can download the original Y86-64 tools and documentation from
+http://csapp.cs.cmu.edu/3e/sim.tar
+
+We have slightly modified the original toolset to make you focus on the
+sequential implementation of Y86-64 architecture and to facilitate the
+automatic grading.
+
+The followings summarize some of the changes made:
+
+- Makefile has been modified for "make handin".
+- The original misc/isa.c file is divided into misc/isa.c and misc/isacore.c
+- The original pipe/psim.c file is divided into pipe/psim.c and seq/psimcore.c
+- misc/Makefile and pipe/Makefile have been changed to reflect the addition of 
+  misc/isacore.c and seq/ssimcore.c files.
+- Some necessary modifications have been made in misc/yas-grammar.lex, misc/isa.h,
+  and misc/isa.c files to support mulq and rmmovb/mrmovb instructions.
+- A new control signal called 'mem_byte' has been added to the data memory. 
+  The mem_byte signal should be set to 1 for rmmovb and mrmovb instructions.
+- pipe-1w.hcl, pipe-broken.hcl, pipe-btfnt.hcl, pipe-lf.hcl, pipe-nt.hcl, and 
+  pipe-std.hcl files in ./pipe arre moved (not used in this project)
+- pipe/pipe-nobypass.hcl is renamed to pipe/pipe-stall.hcl
+- Stuffs related to ncopy.ys have been removed in the ./pipe directory
+- Several test programs that use mulq and rmmovb/mrmovb instructions are added
+  in the ./y86-code directory.
+- The ./seq directory has been removed (not used in this project).
+- The instruction limit is set to 1000000 in pipe/psim.c
+- A new option '-s' is added in the pipe/psim.c file for printing output for
+  automatic grading server (enabled by -DSNU flag in pipe/Makefile).
+
+
+
+Have fun!
+
+Jin-Soo Kim (jinsoo.kim@snu.ac.kr)
+
+---
+4190.308: Computer Architecture
+Spring 2018

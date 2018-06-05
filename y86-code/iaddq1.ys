@@ -1,0 +1,19 @@
+#--------------------------------------------------------------
+# 
+#  Project #5: Optimizing performance on a pipelined processor
+#
+#  June 5, 2018
+#
+#  Jin-Soo Kim (jinsoo.kim@snu.ac.kr)
+#  Systems Software & Architecture Laboratory
+#  Dept. of Computer Science and Engineering
+#  Seoul National University
+#
+#--------------------------------------------------------------
+
+# Test program for iaddq instruction 
+
+  irmovq	$4190, %rax
+  iaddq	 	$308, %rax
+  halt
+  
