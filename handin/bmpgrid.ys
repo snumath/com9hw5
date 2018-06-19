@@ -24,8 +24,8 @@ bmp_grid:
 	# FILL HERE 
 
 	irmovq	$0x03, %r13
-	irmovq	$0x01, %r11
 	irmovq	$0xfffffffffffffffc, %r12
+	irmovq	$0x01, %r11
 	irmovq	$0x00, %r10
 	irmovq	$0xff, %r8
 
@@ -41,24 +41,15 @@ bmp_grid:
 
 	pushq	%rax
 
-	mrmovq	8(%rsp), %rax
-	mrmovq	(%rsp), %rbx
-	mulq	%rbx, %rax
+	mulq	%rdx, %rax
 
 	subq	%rcx, %rax
 	subq	%rcx, %rax
 	subq	%rcx, %rax
-	pushq	%rax
-
-	mrmovq	16(%rsp), %rdx
-	mrmovq	24(%rsp), %rsi
 
 
-
-
-	mrmovq	8(%rsp), %r14
-	mrmovq	(%rsp), %rbx
-
+	mrmovq	(%rsp), %r14
+	mrmovq	8(%rsp), %r12
 
 L2:
 	rmmovb	%r10, (%rdi)
@@ -68,10 +59,9 @@ L2:
 	subq	%r11, %rdx		# %rdx--
 	jg		L2
 
-	subq	%rbx, %rdi
+	subq	%rax, %rdi
 	subq	%rcx, %rsi		# %rsi -= gap
-	#mrmovq	16(%rsp), %rdx	# %rdx = height
-	mrmovq	16(%rsp), %rdx	# %rdx = height
+	rrmovq	%r12, %rdx	# %rdx = height
 	jg		L2
 
 
@@ -80,10 +70,10 @@ L2:
 	#################################################
 
 
-	mrmovq	(%rsp), %rbx
+	rrmovq	%rax, %rbx
 	addq	%rbx, %rdi
 
-	mrmovq	8(%rsp), %rbx
+	mrmovq	(%rsp), %rbx
 	subq	%rbx, %rdi
 
 	subq	%r13, %rdi
@@ -96,20 +86,21 @@ L2:
 	addq	%rcx, %rdi
 	addq	%rcx, %rdi
 
-	mrmovq	8(%rsp), %rax
+	mrmovq	(%rsp), %rax
 	mulq	%rcx, %rax
 
-	mrmovq	24(%rsp), %rbx
+	mrmovq	16(%rsp), %rbx
 	subq	%rbx, %rax
 	subq	%rbx, %rax
 	subq	%rbx, %rax
 
 	pushq	%rax
 
-	mrmovq	24(%rsp), %rdx	# %rdx = height
-	mrmovq	32(%rsp), %rsi	# %rsi = width
+	mrmovq	16(%rsp), %rdx	# %rdx = height
+	mrmovq	24(%rsp), %rsi	# %rsi = width
 
 	mrmovq	(%rsp), %rbx
+	mrmovq	24(%rsp), %r12
 
 L3:
 	rmmovb	%r10, (%rdi)
@@ -119,20 +110,19 @@ L3:
 	subq	%r11, %rsi
 	jg		L3
 
-	mrmovq	32(%rsp), %rsi	# %rsi = width
+	rrmovq	%r12, %rsi	# %rsi = width
 	subq	%rbx, %rdi	# (end,l) -> (end,l-gap)
 	subq	%rcx, %rdx		# %rdx -= gap
 	jg		L3
 
 
-	mrmovq	24(%rsp), %rdx	# %rdx = height
+	mrmovq	16(%rsp), %rdx	# %rdx = height
 	
 
     # ----------------------------------------------------------
 	# NOTE: The code size is limited to 1024 bytes. 
     # The addresses of all instructions must be within 0x800.
     # ----------------------------------------------------------
-	popq	%rax
 	popq	%rax
 	popq	%rax
 	popq	%rdx

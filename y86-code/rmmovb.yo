@@ -1,0 +1,20 @@
+                            | #--------------------------------------------------------------
+                            | # 
+                            | #  Project #5: Optimizing performance on a pipelined processor
+                            | #
+                            | #  June 5, 2018
+                            | #
+                            | #  Jin-Soo Kim (jinsoo.kim@snu.ac.kr)
+                            | #  Systems Software & Architecture Laboratory
+                            | #  Dept. of Computer Science and Engineering
+                            | #  Seoul National University
+                            | #
+                            | #--------------------------------------------------------------
+                            | 
+                            | # Test program for rmmovb instruction 
+                            | 
+0x000: 30f20001000000000000 |   irmovq 	$0x100, %rdx
+0x00a: 30f078563412bebafeca |   irmovq 	$0xcafebabe12345678, %rax
+0x014: 41020000000000000000 |   rmmovb 	%rax, (%rdx)		
+0x01e: 00                   |   halt
+                            |   

@@ -1,0 +1,20 @@
+                            | #--------------------------------------------------------------
+                            | # 
+                            | #  Project #5: Optimizing performance on a pipelined processor
+                            | #
+                            | #  June 5, 2018
+                            | #
+                            | #  Jin-Soo Kim (jinsoo.kim@snu.ac.kr)
+                            | #  Systems Software & Architecture Laboratory
+                            | #  Dept. of Computer Science and Engineering
+                            | #  Seoul National University
+                            | #
+                            | #--------------------------------------------------------------
+                            | 
+                            | # Test program for mulq instruction 
+                            | 
+0x000: 30f05e10000000000000 |   irmovq 	$4190, %rax
+0x00a: 30f13401000000000000 |   irmovq 	$308, %rcx
+0x014: 6410                 |   mulq		%rcx, %rax
+0x016: 00                   |   halt
+                            |   
