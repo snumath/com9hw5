@@ -4025,19 +4025,19 @@
                             | 
                             | 	# FILL HERE 
                             | 
-0x400: 30fd0300000000000000 | 	irmovq	$0x03, %r13
-0x40a: 30fcfcffffffffffffff | 	irmovq	$0xfffffffffffffffc, %r12
-0x414: 30fb0100000000000000 | 	irmovq	$0x01, %r11
-0x41e: 30fa0000000000000000 | 	irmovq	$0x00, %r10
-0x428: 30f8ff00000000000000 | 	irmovq	$0xff, %r8
+0x400: 30f8ff00000000000000 | 	irmovq	$0xff, %r8
                             | 
-0x432: a06f                 | 	pushq	%rsi
-0x434: a02f                 | 	pushq	%rdx
+0x40a: a06f                 | 	pushq	%rsi
+0x40c: 30fd0300000000000000 | 	irmovq	$0x03, %r13
+0x416: a02f                 | 	pushq	%rdx
                             | 
-0x436: 2060                 | 	rrmovq	%rsi, %rax
-0x438: 6060                 | 	addq	%rsi, %rax
-0x43a: 6060                 | 	addq	%rsi, %rax
+0x418: 2060                 | 	rrmovq	%rsi, %rax
+0x41a: 30fa0000000000000000 | 	irmovq	$0x00, %r10
+0x424: 6060                 | 	addq	%rsi, %rax
+0x426: 30fb0100000000000000 | 	irmovq	$0x01, %r11
+0x430: 6060                 | 	addq	%rsi, %rax
                             | 
+0x432: 30fcfcffffffffffffff | 	irmovq	$0xfffffffffffffffc, %r12
 0x43c: 60d0                 | 	addq	%r13, %rax
 0x43e: 62c0                 | 	andq	%r12, %rax
                             | 
@@ -4046,11 +4046,11 @@
 0x442: 6420                 | 	mulq	%rdx, %rax
                             | 
 0x444: 6110                 | 	subq	%rcx, %rax
-0x446: 6110                 | 	subq	%rcx, %rax
-0x448: 6110                 | 	subq	%rcx, %rax
                             | 
-0x44a: 50e40000000000000000 | 	mrmovq	(%rsp), %r14
-0x454: 50c40800000000000000 | 	mrmovq	8(%rsp), %r12
+0x446: 50e40000000000000000 | 	mrmovq	(%rsp), %r14
+0x450: 6110                 | 	subq	%rcx, %rax
+0x452: 50c40800000000000000 | 	mrmovq	8(%rsp), %r12
+0x45c: 6110                 | 	subq	%rcx, %rax
                             | 
                             | 
 0x45e:                      | L2:
@@ -4062,8 +4062,8 @@
 0x480: 765e04000000000000   | 	jg		L2
                             | 
                             | 
-0x489: 20c2                 | 	rrmovq	%r12, %rdx	# %rdx = height
-0x48b: 6107                 | 	subq	%rax, %rdi
+0x489: 6107                 | 	subq	%rax, %rdi
+0x48b: 20c2                 | 	rrmovq	%r12, %rdx	# %rdx = height
 0x48d: 6116                 | 	subq	%rcx, %rsi		# %rsi -= gap
 0x48f: 765e04000000000000   | 	jg		L2
                             | 
@@ -4096,38 +4096,34 @@
 0x4ce: 6130                 | 	subq	%rbx, %rax
 0x4d0: 6130                 | 	subq	%rbx, %rax
                             | 
-0x4d2: a00f                 | 	pushq	%rax
                             | 
-0x4d4: 50241000000000000000 | 	mrmovq	16(%rsp), %rdx	# %rdx = height
-0x4de: 50641800000000000000 | 	mrmovq	24(%rsp), %rsi	# %rsi = width
+0x4d2: 50641000000000000000 | 	mrmovq	16(%rsp), %rsi	# %rsi = width
                             | 
-0x4e8: 50340000000000000000 | 	mrmovq	(%rsp), %rbx
-0x4f2: 50c41800000000000000 | 	mrmovq	24(%rsp), %r12
+0x4dc: 2003                 | 	rrmovq	%rax, %rbx
+0x4de: 50c41000000000000000 | 	mrmovq	16(%rsp), %r12
                             | 
                             | 
-0x4fc:                      | L3:
-0x4fc: 41a70000000000000000 | 	rmmovb	%r10, (%rdi)
-0x506: 41a70100000000000000 | 	rmmovb	%r10, 1(%rdi)
-0x510: 41870200000000000000 | 	rmmovb	%r8, 2(%rdi)
-0x51a: 61d7                 | 	subq	%r13, %rdi		# (k,l) -> (k-1,l)
-0x51c: 61b6                 | 	subq	%r11, %rsi
-0x51e: 76fc04000000000000   | 	jg		L3
+0x4e8:                      | L3:
+0x4e8: 41a70000000000000000 | 	rmmovb	%r10, (%rdi)
+0x4f2: 41a70100000000000000 | 	rmmovb	%r10, 1(%rdi)
+0x4fc: 41870200000000000000 | 	rmmovb	%r8, 2(%rdi)
+0x506: 61d7                 | 	subq	%r13, %rdi		# (k,l) -> (k-1,l)
+0x508: 61b6                 | 	subq	%r11, %rsi
+0x50a: 76e804000000000000   | 	jg		L3
                             | 
-0x527: 20c6                 | 	rrmovq	%r12, %rsi	# %rsi = width
-0x529: 6137                 | 	subq	%rbx, %rdi	# (end,l) -> (end,l-gap)
-0x52b: 6112                 | 	subq	%rcx, %rdx		# %rdx -= gap
-0x52d: 76fc04000000000000   | 	jg		L3
+0x513: 6137                 | 	subq	%rbx, %rdi	# (end,l) -> (end,l-gap)
+0x515: 20c6                 | 	rrmovq	%r12, %rsi	# %rsi = width
+0x517: 6112                 | 	subq	%rcx, %rdx		# %rdx -= gap
+0x519: 76e804000000000000   | 	jg		L3
                             | 
                             | 
-0x536: 50241000000000000000 | 	mrmovq	16(%rsp), %rdx	# %rdx = height
                             | 	
                             | 
                             |     # ----------------------------------------------------------
                             | 	# NOTE: The code size is limited to 1024 bytes. 
                             |     # The addresses of all instructions must be within 0x800.
                             |     # ----------------------------------------------------------
-0x540: b00f                 | 	popq	%rax
-0x542: b00f                 | 	popq	%rax
-0x544: b02f                 | 	popq	%rdx
-0x546: b06f                 | 	popq	%rsi
-0x548: 90                   | 	ret
+0x522: b00f                 | 	popq	%rax
+0x524: b02f                 | 	popq	%rdx
+0x526: b06f                 | 	popq	%rsi
+0x528: 90                   | 	ret

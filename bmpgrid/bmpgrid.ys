@@ -23,19 +23,19 @@ bmp_grid:
 
 	# FILL HERE 
 
-	irmovq	$0x03, %r13
-	irmovq	$0xfffffffffffffffc, %r12
-	irmovq	$0x01, %r11
-	irmovq	$0x00, %r10
 	irmovq	$0xff, %r8
 
 	pushq	%rsi
+	irmovq	$0x03, %r13
 	pushq	%rdx
 
 	rrmovq	%rsi, %rax
+	irmovq	$0x00, %r10
 	addq	%rsi, %rax
+	irmovq	$0x01, %r11
 	addq	%rsi, %rax
 
+	irmovq	$0xfffffffffffffffc, %r12
 	addq	%r13, %rax
 	andq	%r12, %rax
 
@@ -44,11 +44,11 @@ bmp_grid:
 	mulq	%rdx, %rax
 
 	subq	%rcx, %rax
-	subq	%rcx, %rax
-	subq	%rcx, %rax
 
 	mrmovq	(%rsp), %r14
+	subq	%rcx, %rax
 	mrmovq	8(%rsp), %r12
+	subq	%rcx, %rax
 
 
 L2:
@@ -60,8 +60,8 @@ L2:
 	jg		L2
 
 
-	rrmovq	%r12, %rdx	# %rdx = height
 	subq	%rax, %rdi
+	rrmovq	%r12, %rdx	# %rdx = height
 	subq	%rcx, %rsi		# %rsi -= gap
 	jg		L2
 
@@ -94,13 +94,11 @@ L2:
 	subq	%rbx, %rax
 	subq	%rbx, %rax
 
-	pushq	%rax
 
-	mrmovq	16(%rsp), %rdx	# %rdx = height
-	mrmovq	24(%rsp), %rsi	# %rsi = width
+	mrmovq	16(%rsp), %rsi	# %rsi = width
 
-	mrmovq	(%rsp), %rbx
-	mrmovq	24(%rsp), %r12
+	rrmovq	%rax, %rbx
+	mrmovq	16(%rsp), %r12
 
 
 L3:
@@ -111,20 +109,18 @@ L3:
 	subq	%r11, %rsi
 	jg		L3
 
-	rrmovq	%r12, %rsi	# %rsi = width
 	subq	%rbx, %rdi	# (end,l) -> (end,l-gap)
+	rrmovq	%r12, %rsi	# %rsi = width
 	subq	%rcx, %rdx		# %rdx -= gap
 	jg		L3
 
 
-	mrmovq	16(%rsp), %rdx	# %rdx = height
 	
 
     # ----------------------------------------------------------
 	# NOTE: The code size is limited to 1024 bytes. 
     # The addresses of all instructions must be within 0x800.
     # ----------------------------------------------------------
-	popq	%rax
 	popq	%rax
 	popq	%rdx
 	popq	%rsi
