@@ -70,6 +70,7 @@ L2:
 
 	subq	%rbx, %rdi
 	subq	%rcx, %rsi		# %rsi -= gap
+	#mrmovq	16(%rsp), %rdx	# %rdx = height
 	mrmovq	16(%rsp), %rdx	# %rdx = height
 	jg		L2
 
